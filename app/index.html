@@ -61,25 +61,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <body unresolved class="fullbleed layout vertical">
   <span id="browser-sync-binding"></span>
+  <!-- needs to be outside of an app so it can set config before WebComponentsReady -->
+  <iron-router-config path-style="hash" hash-prefix="#" manual-start></iron-router-config>
   <template is="dom-bind" id="app">
-
-
-    <iron-router-config path-style="hash" hash-prefix="#">
-    </iron-router-config>
-
-    <!-- Nested route -->
-    <iron-route route="/users">
-      <iron-route route="/:name" name="{{matches}}"></iron-route>
-    </iron-route>
 
     <iron-route route="/:topmenu" topmenu="{{route}}"></iron-route>
 
-    <!-- Basic route -->
-    <iron-route route="/contact"></iron-route>
+    <!-- <iron-route route="/users/:name" ></iron-route> -->
 
     <!-- catch-all -->
     <iron-route route="/(.*)" redirect-to="/home"></iron-route>
-
 
     <paper-drawer-panel id="paperDrawerPanel">
       <!-- Drawer Scroll Header Panel -->
@@ -91,18 +82,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </paper-toolbar>
 
         <!-- Drawer Content -->
-        <paper-menu class="list" selected="{{route}}">
-          <a href="#home">
+        <paper-menu class="list" attr-for-selected="route" selected="{{route}}">
+          <a href="#/home" route="home">
             <iron-icon icon="home"></iron-icon>
             <span>Home</span>
           </a>
 
-          <a href="#users">
+          <a href="#/users" route="users">
             <iron-icon icon="info"></iron-icon>
             <span>Users</span>
           </a>
 
-          <a href="#contact">
+          <a href="#/contact" route="contact">
             <iron-icon icon="mail"></iron-icon>
             <span>Contact</span>
           </a>
@@ -138,9 +129,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <!-- Main Content -->
         <div class="content">
 
-          <iron-pages selected="{{route}}">
+          <iron-pages attr-for-selected="route" selected="{{route}}">
 
-            <section data-route="home">
+            <section route="home">
               <paper-material elevation="1">
                 <my-greeting></my-greeting>
                 <span>{{route}}</span>
@@ -175,7 +166,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             </section>
 
-            <section data-route="users">
+            <section route="users">
               <paper-material elevation="1">
                 <h2 class="page-title">Users</h2>
                 <p>This is the users section</p>
@@ -183,7 +174,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               </paper-material>
             </section>
 
-            <section data-route="user-info">
+            <section route="user-info">
               <paper-material elevation="1">
                 <h2 class="page-title">
                 User:<span>{{params.name}}</span>
@@ -192,7 +183,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               </paper-material>
             </section>
 
-            <section data-route="contact">
+            <section route="contact">
               <paper-material elevation="1">
                 <h2 class="page-title">Contact</h2>
                 <p>This is the contact section</p>
