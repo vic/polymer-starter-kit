@@ -65,9 +65,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <iron-router-config path-style="hash" hash-prefix="#" manual-start></iron-router-config>
   <template is="dom-bind" id="app">
 
-    <iron-route route="/:topmenu" topmenu="{{route}}"></iron-route>
-
-    <!-- <iron-route route="/users/:name" ></iron-route> -->
+    <iron-route route="/:topmenu/:submenu?" topmenu="{{route}}" submenu="{{submenu}}"></iron-route>
 
     <!-- catch-all -->
     <iron-route route="/(.*)" redirect-to="/home"></iron-route>
@@ -88,7 +86,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <span>Home</span>
           </a>
 
-          <a href="#/users" route="users">
+          <a href="#/users/all" route="users">
             <iron-icon icon="info"></iron-icon>
             <span>Users</span>
           </a>
@@ -167,22 +165,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </section>
 
             <section route="users">
-              <paper-material elevation="1">
-                <h2 class="page-title">Users</h2>
-                <p>This is the users section</p>
-                <a href="#/users/Rob">Rob</a>
-              </paper-material>
+              <iron-pages attr-for-selected="user" selected="{{submenu}}">
+              <section user="all">
+                <paper-material elevation="1">
+                  <h2 class="page-title">Users</h2>
+                  <p>This is the users section</p>
+                  <a href="#/users/Rob">Rob</a>
+                </paper-material>
+              </section>
+              <section user="Rob">
+                <paper-material elevation="1">
+                  <h2 class="page-title">
+                  User:<span>{{submenu}}</span>
+                  </h2>
+                  <div>This is <span>{{submenu}}</span>'s section</div>
+                </paper-material>
+              </section>
             </section>
-
-            <section route="user-info">
-              <paper-material elevation="1">
-                <h2 class="page-title">
-                User:<span>{{params.name}}</span>
-                </h2>
-                <div>This is <span>{{params.name}}</span>'s section</div>
-              </paper-material>
-            </section>
-
             <section route="contact">
               <paper-material elevation="1">
                 <h2 class="page-title">Contact</h2>
