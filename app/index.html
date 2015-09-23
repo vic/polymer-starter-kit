@@ -166,21 +166,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             <section route="users">
               <iron-pages attr-for-selected="user" selected="{{submenu}}">
-              <section user="all">
-                <paper-material elevation="1">
-                  <h2 class="page-title">Users</h2>
-                  <p>This is the users section</p>
-                  <a href="#/users/Rob">Rob</a>
-                </paper-material>
-              </section>
-              <section user="Rob">
-                <paper-material elevation="1">
-                  <h2 class="page-title">
-                  User:<span>{{submenu}}</span>
-                  </h2>
-                  <div>This is <span>{{submenu}}</span>'s section</div>
-                </paper-material>
-              </section>
+                <section user="all">
+                  <paper-material elevation="1">
+                    <h2 class="page-title">Users</h2>
+                    <p>This is the users section</p>
+                    <a href="#/users/Rob">Rob</a>
+                  </paper-material>
+                </section>
+                <section user="Rob">
+                  <paper-material elevation="1">
+                    <h2 class="page-title">
+                    User:<span>{{submenu}}</span>
+                    </h2>
+                    <div>This is <span>{{submenu}}</span>'s section</div>
+                  </paper-material>
+                </section>
+              </iron-pages>
             </section>
             <section route="contact">
               <paper-material elevation="1">
@@ -188,7 +189,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <p>This is the contact section</p>
               </paper-material>
             </section>
-
           </iron-pages>
         </div>
       </paper-scroll-header-panel>
