@@ -1,6 +1,6 @@
 <dom-module id="v-hello">
     <template>
-        <h1>Hello <span>[[name]]</span></h1>
+        <h1><span>[[greeting]]</span> <span>[[name]]</span></h1>
     </template>
 </dom-module>
 <script>
@@ -12,7 +12,17 @@
              value: function () {
                  return 'World';
              }
+         },
+         greeting: {
+             type: String,
+             value: function () {
+                 return 'Hello'
+             },
+             notify: true
          }
+     },
+     bye: function () {
+         this.greeting = 'Adios';
      }
  })
 </script>

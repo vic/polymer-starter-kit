@@ -78,6 +78,17 @@
                  });
              });
 
+             it('changes to goodbye', function (done) {
+                 var test = fixture('custom', {who: 'Polymer'})
+                 var h1 = test.querySelector('h1');
+                 assert.equal('Hello Polymer', h1.textContent);
+
+                 test.querySelector('v-hello').bye();
+                 flush(function () {
+                   assert.equal('Adios Polymer', h1.textContent);
+                   done();
+                 });
+             });
          });
         </script>
 
