@@ -21,15 +21,19 @@
 
         <script>
          describe('v-hello component',  function () {
-
-             it('displays hello', function (done) {
+             function fixture(id, context) {
                  fixture = document.getElementById('basic');
                  fixture.restore();
-                 fixture.create();
+                 fixture.create(context);
+                 return fixture;
+             }
 
-                 h1 = fixture.querySelector('h1');
-                 assert.equal(h1.textContent, 'Hello');
+             it('displays hello', function (done) {
+                 h1 = fixture('basic').querySelector('h1');
+                 assert.equal(h1.textContent, 'Hello World');
+                 done();
              });
+
          });
         </script>
 

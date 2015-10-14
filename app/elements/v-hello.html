@@ -1,11 +1,19 @@
 <dom-module id="v-hello">
     <template>
-        <h1>Hello</h1>
+        <h1>Hello <span>{{name}}</span></h1>
     </template>
 </dom-module>
 <script>
  Polymer({
      is: 'v-hello',
+     properties: {
+         name: {
+             type: String,
+             value: function () {
+                 return 'World';
+             }
+         }
+     },
      created: function created() {
          console.log("new v-hello created")
      }
