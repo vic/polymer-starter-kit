@@ -10,6 +10,7 @@
 
         <!-- Import the element to test -->
         <link rel="import" href="../../bower_components/polymer/polymer.html">
+        <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
         <link rel="import" href="../elements/v-hello.html">
 
     </head>
@@ -25,6 +26,14 @@
             </template>
         </test-fixture>
 
+        <test-fixture id="ajaxed">
+            <template is="dom-template">
+                <v-hello name="[[result.friend]]"></v-hello>
+                <iron-ajax id="ajax" url="hello-juan.json"
+                           handle-as="json" last-response="{{result}}"></iron-ajax>
+            </template>
+        </test-fixture>
+
         <script>
          describe('v-hello component',  function () {
 
@@ -35,16 +44,38 @@
                  return el;
              }
 
+             // Perform an ironAjax, wait for next flush and invoke callback
+             function ajaxFlush(ironAjax, callback) {
+                 var listener = function listener() {
+                     var args = arguments; 
+                     ironAjax.removeEventListener('response', listener);
+                     flush(function() {
+                         callback.apply(null, args);
+                     });
+                 };
+                 ironAjax.addEventListener('response', listener);
+                 ironAjax.generateRequest();
+             }
+
              it('displays default name', function (done) {
-                 h1 = fixture('basic').querySelector('h1');
+                 var h1 = fixture('basic').querySelector('h1');
                  assert.equal(h1.textContent, 'Hello World');
                  done();
              });
 
              it('displays custom name', function (done) {
-                 h1 = fixture('custom', {who: 'Mexico'}).querySelector('h1');
+                 var h1 = fixture('custom', {who: 'Mexico'}).querySelector('h1');
                  assert.equal(h1.textContent, 'Hello Mexico');
                  done();
+             });
+
+             it('displays name from ajax result', function (done) {
+                 var test = fixture('ajaxed', {url: 'hello-juan.json'});
+                 ajaxFlush(test.querySelector('#ajax'), function () {
+                     var h1 = test.querySelector('h1');
+                     assert.equal('Hello Juan', h1.textContent);
+                     done();
+                 });
              });
 
          });
