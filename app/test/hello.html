@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+        <title>hello test</title>
+
+        <script src="../../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+        <script src="../../bower_components/web-component-tester/browser.js"></script>
+        <script src="../../bower_components/test-fixture/test-fixture-mocha.js"></script>
+        <link rel="import" href="../../bower_components/test-fixture/test-fixture.html">
+
+        <!-- Import the element to test -->
+        <link rel="import" href="../../bower_components/polymer/polymer.html">
+        <link rel="import" href="../elements/v-hello.html">
+
+    </head>
+    <body>
+
+        <test-fixture id="basic">
+            <v-hello></v-hello>
+        </test-fixture>
+
+        <script>
+         describe('v-hello component',  function () {
+
+             it('displays hello', function (done) {
+                 fixture = document.getElementById('basic');
+                 fixture.restore();
+                 fixture.create();
+
+                 h1 = fixture.querySelector('h1');
+                 assert.equal(h1.textContent, 'Hello');
+             });
+         });
+        </script>
+
+    </body>
+    </head>
+</html>
